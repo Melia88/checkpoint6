@@ -7,10 +7,16 @@
 <script>
 export default {
   name: 'ProfileComponent',
-  setup() {
-    return {}
-  },
-  components: {}
+  props: {
+    profile: {
+      type: Object,
+      required: true
+    },
+    setup() {
+      return {}
+    },
+    components: {}
+  }
 }
 </script>
 

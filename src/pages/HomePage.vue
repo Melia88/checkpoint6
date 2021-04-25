@@ -4,6 +4,7 @@
     <h1 class="my-5 bg-dark text-light p-3 rounded d-flex align-items-center">
       <span class="mx-2 text-white">Vue 3 Starter</span>
     </h1> -->
+
     <PostsComponent v-for="post in state.posts" :key="post.id" :post="post" />
   </div>
 </template>
@@ -19,6 +20,7 @@ export default {
   setup() {
     const state = reactive({
       posts: computed(() => AppState.posts)
+      // newPost()
     })
     onMounted(async() => {
       try {

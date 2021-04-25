@@ -1,7 +1,7 @@
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
-class ProfilePage {
+class ProfileService {
   async getAll() {
     try {
       const res = await api.get('api/profile/')
@@ -10,6 +10,11 @@ class ProfilePage {
       logger.log('EROOOORRRR!', error)
     }
   }
+
+  async getActiveProfile(id) {
+    const res = await api.get('api/profiles/' + id)
+    AppState.activeProfile = res.data
+  }
 }
 
-export const profilePage = new ProfilePage()
+export const profileService = new ProfileService()

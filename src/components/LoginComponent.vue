@@ -17,10 +17,11 @@
           <img
             :src="user.picture"
             alt="user photo"
-            height="40"
+            height="180"
             class="rounded-circle"
           />
-          <span class="mx-3">{{ user.name }}</span>
+        </div>
+        <div> <span class="mx-3">{{ user.name }}</span>
         </div>
         <div
           class="dropdown-menu p-0 list-group w-100"

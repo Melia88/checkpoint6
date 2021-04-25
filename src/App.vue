@@ -1,19 +1,20 @@
-<template class="container">
+<template class="container-fluid">
   <div class="row">
-    <div class="col-3">
+    <div class="col-3 bg-light">
       <LoginComponent />
     </div>
-    <div class="col-8">
+    <div class="col">
       <header>
         <Navbar />
       </header>
-      <main>
-        <div class="row">
-          <div class="col-9">
-            <router-view />
-          </div>
-          <div class="col-3">
-          </div>
+      <main class="row">
+        <div class="col-9">
+          <router-view />
+        </div>
+        <div class="col-3 bg-light">
+          <!--inject adds component-->
+          <div> <AddsComponent /> </div>
+          <div> <AddsComponent /> </div>
         </div>
       </main>
     </div>
