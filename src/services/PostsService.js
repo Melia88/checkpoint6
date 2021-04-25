@@ -10,6 +10,11 @@ class PostsService {
     // console.log(res.data)
   }
 
+  async getByCreatorId(id) {
+    const res = await api.get(`api/profiles/${id}/posts`)
+    AppState.posts = res.data.posts
+  }
+
   // getByCreatorId
   // NOTE creatorId is the same as getByProfileId
   // api/profiles/:id/posts
@@ -31,17 +36,13 @@ class PostsService {
     AppState.newer = res.data.newer
   }
 
-  async createPost(newPost) {
-    const res = await api.post('posts', newPost)
-    AppState.posts.push(res.data)
+  async createPost(data) {
+    const res = await api.post('posts', data)
+    // AppState.posts.push(res.data)
+    AppState.posts = [...AppState.posts, res.data]
     // everytime a post is created, we will change pages
     // router.push({ name: 'CarDetails', params: { id: res.data.id } })
   }
-
-  // async createLike(newLike) {
-  //   const res = await api.post('api/likes', newLike)
-  //   AppState.posts.push(res.data)
-  // }
 
   async likePost(id) {
     await api.post(`api/posts/${id}/like`)

@@ -14,7 +14,6 @@
         <div class="col-3 bg-light">
           <!--inject adds component-->
           <div> <AddsComponent /> </div>
-          <div> <AddsComponent /> </div>
         </div>
       </main>
     </div>

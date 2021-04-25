@@ -9,11 +9,11 @@
         </div>
         <div class="col">
           <span> {{ post.creator.name }}</span>
-          <p> {{ post.createdAt }}</p>
-          <!-- <span> likes{{ post.likes }}</span> -->
+          <p class="text-muted">
+            {{ post.createdAt }}
+          </p>
+          <i v-if="post.creator.graduated" class="fas fa-user-graduate"></i>
           <div>
-            <p>
-            </p>
             <p> {{ post.body }}</p>
           </div>
         </div>

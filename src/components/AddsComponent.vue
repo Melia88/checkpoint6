@@ -1,41 +1,45 @@
 <template>
-  <div class="AddsComponent">
-    <!-- <img :src="state.activeAdds.tall" alt=""> -->
-    {{ state.activeAdds }}
+  <div class="row addsComponent column-height m-2">
+    <div class="col-12" v-if="adds[0] !=null">
+      <img class="img-fluid my-2" :src="adds[0].tall" alt="">
+      <img class="img-fluid my-5" :src="adds[1].tall" alt="">
+    </div>
   </div>
-  <!-- <div>
-    <img :src="state.activeAdds" alt="Add2">
-  </div> -->
 </template>
 
 <script>
 import { reactive, computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
 import { addsService } from '../services/AddsService'
+import Notification from '../utils/Notification'
 export default {
   name: 'AddsComponent',
-  props: {
-    adds: {
-      type: Object,
-      required: true
-    }
-  },
+  // props: {
+  //   adds: {
+  //     type: Object,
+  //     required: true
+  //   }
+  // },
   setup() {
     const state = reactive({
-      activeAdds: computed(() => AppState.activeAdds)
+      adds: computed(() => AppState.adds)
     })
 
     onMounted(async() => {
-      await addsService.getAll()
+      try {
+        await addsService.getAll()
+      } catch (error) {
+        Notification.toast('Error: ' + error, 'error')
+      }
     })
     return {
-      state
+      state,
+      adds: computed(() => AppState.adds)
     }
   },
   components: {}
 }
 </script>
-
 <style lang="scss" scoped>
 
 </style>
