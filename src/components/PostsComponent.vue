@@ -6,9 +6,9 @@
           <router-link :to="{name: 'ProfilePage', params: {id: post.creator.id}}">
             <img class="rounded-circle small-img" :src="post.creator.picture" alt="Creator Photo">
           </router-link>
-        </div>
-        <div class="col">
-          <span> {{ post.creator.name }}</span>
+          <div class="col">
+            <span> {{ post.creator.name }}</span>
+          </div>
           <p class="text-muted">
             {{ post.createdAt }}
           </p>
@@ -29,7 +29,7 @@
             </p>
           </div>
           <div class="post--buttons d-flex justify-content-between pt-3">
-            <button class="btn btn-outline-dark rounded shadow">
+            <button class="btn btn-outline-dark rounded shadow" @click="deletePost(post)">
               <i class="fas fa-trash-alt"></i>
             </button>
           </div>
@@ -55,6 +55,14 @@ export default {
       async likePost(post) {
         try {
           await postsService.likePost(post.id)
+        } catch (error) {
+          Notification.toast('Error: ' + error, ' error')
+        }
+      },
+      async deletePost(post) {
+        try {
+          await postsService.deletePost(post.id)
+          // console.log('im trying to delete')
         } catch (error) {
           Notification.toast('Error: ' + error, ' error')
         }

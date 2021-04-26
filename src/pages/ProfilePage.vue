@@ -15,9 +15,11 @@
     <PostsComponent v-for="post in state.posts" :key="post.id" :post="post" />
   </div>
 
-  <div class="ProfilePage card shadow col-12 m-2" v-if="state.Profile == state.account">
+  <div class="ProfilePage card shadow col-12 m-2">
+    <!--  v-if="state.Profile.id == state.account.id" -->
     <div class="card-body">
-      <form @submit.prevent="create">
+      <form @submit.prevent="createPost">
+        <!-- this createPost is the function  -->
         <div class="form-group">
           <input type="text"
                  class="form-control"
@@ -96,7 +98,7 @@ export default {
       state,
       async createPost() {
         try {
-          await postsService.createPost(state.data)
+          await postsService.createPost(state.newPost)
           state.newPost = {}
           Notification.toast('Successfully Created Post', 'success')
         } catch (error) {

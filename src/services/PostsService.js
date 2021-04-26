@@ -36,10 +36,11 @@ class PostsService {
     AppState.newer = res.data.newer
   }
 
-  async createPost(data) {
-    const res = await api.post('posts', data)
+  async createPost(body) {
+    const res = await api.post('api/posts', body)
     // AppState.posts.push(res.data)
     AppState.posts = [...AppState.posts, res.data]
+    // console.log(res.data)
     // everytime a post is created, we will change pages
     // router.push({ name: 'CarDetails', params: { id: res.data.id } })
   }
@@ -47,6 +48,11 @@ class PostsService {
   async likePost(id) {
     await api.post(`api/posts/${id}/like`)
     this.getAll()
+  }
+
+  async deletePost(id) {
+    await api.delete('posts/' + id)
+    AppState.posts = AppState.posts.filter(post => post.id !== id)
   }
 }
 
