@@ -3,7 +3,7 @@
     <div>
       <div class="row bg-light mt-2 ml-0 shadow">
         <div class="col" style="cursor: pointer" v-if="post.creator">
-          <router-link :to="{name: 'ProfilePage', params: {id: post.id}}">
+          <router-link :to="{name: 'ProfilePage', params: {id: post.creator.id}}">
             <img class="rounded-circle small-img" :src="post.creator.picture" alt="Creator Photo">
           </router-link>
         </div>
@@ -18,11 +18,18 @@
           </div>
         </div>
         <div class="col">
-          <p class="text-right">
-            <button type="button" class="btn btn-outline-info" @click="likePost(post)">
-              <i class="far fa-heart"></i> {{ post.likes.length }}
+          <div>
+            <p class="text-right">
+              <button type="button" class="btn btn-outline-info" @click="likePost(post)">
+                <i class="far fa-heart"></i> {{ post.likes.length }}
+              </button>
+            </p>
+          </div>
+          <div class="post--buttons d-flex justify-content-between pt-3">
+            <button class="btn btn-outline-dark rounded shadow">
+              <i class="fas fa-trash-alt"></i>
             </button>
-          </p>
+          </div>
         </div>
       </div>
     </div>

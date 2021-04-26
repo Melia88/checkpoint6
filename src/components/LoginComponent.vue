@@ -28,6 +28,21 @@
           :class="{ show: state.dropOpen }"
           @click="state.dropOpen = false"
         >
+
+          <div class="profile-icons">
+            <div>
+              <i class="fab fa-github mr-3"></i>
+
+            </div>
+            <div>
+              <i class="fab fa-linkedin mr-3"></i>
+
+            </div>
+            <div>
+              <i class="fas fa-file"></i>
+
+            </div>
+          </div>
           <!-- <router-link :to="{ name: 'Account' }">
               <div class="list-group-item list-group-item-action hoverable">
                 Account
