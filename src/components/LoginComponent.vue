@@ -9,17 +9,20 @@
         Login
       </button>
 
-      <div class="dropdown" v-else>
+      <div class="dropdown">
         <div
           class="dropdown-toggle"
           @click="state.dropOpen = !state.dropOpen"
         >
-          <img
-            :src="user.picture"
-            alt="user photo"
-            height="180"
-            class="rounded-circle"
-          />
+          <router-link :to="{name: 'ProfilePage', params: {id: state.account.id}}">
+            <img
+              :src="user.picture"
+              alt="user photo"
+              height="180"
+              class="rounded-circle"
+            />
+
+          </router-link>
         </div>
         <div> <span class="mx-3">{{ user.name }}</span>
         </div>
@@ -69,7 +72,8 @@ export default {
   name: 'LoginComponent',
   setup() {
     const state = reactive({
-      dropOpen: false
+      dropOpen: false,
+      account: computed(() => AppState.account)
     })
     return {
       state,

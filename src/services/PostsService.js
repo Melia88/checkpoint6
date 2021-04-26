@@ -10,10 +10,10 @@ class PostsService {
     // console.log(res.data)
   }
 
-  async getByCreatorId(id) {
-    const res = await api.get(`api/profiles/${id}/posts`)
-    AppState.posts = res.data.posts
-  }
+  // async getByCreatorId(id) {
+  //   const res = await api.get(`api/profiles/${id}/posts`)
+  //   AppState.posts = res.data.posts
+  // }
 
   // getByCreatorId
   // NOTE creatorId is the same as getByProfileId

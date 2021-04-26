@@ -2,8 +2,8 @@
   <div class="row" v-if="state.activeProfile">
     <div class="col-md-8 d-flex flex-column">
       <div class="profile m-3 shadow rounded">
-        <img :src="state.activeProfile.picture" class="rounded-circle mb-0 pt-4" alt="">
-        <p class="mb-4">
+        <img :src="state.activeProfile.picture" class="rounded-circle mb-0 pt-4 w-100" alt="">
+        <p class="profile-pic mb-4">
           {{ state.activeProfile.name }}
         </p>
         <p class="text-muted">
@@ -11,9 +11,8 @@
         </p>
       </div>
     </div>
-    <div class="profile-posts">
-      <PostsComponent v-for="posts in state.myPosts" :key="posts.id" :post="post" />
-    </div>
+
+    <PostsComponent v-for="post in state.posts" :key="post.id" :post="post" />
   </div>
 
   <div class="ProfilePage card shadow col-12 m-2">
@@ -66,8 +65,9 @@ export default {
       newPost: {},
       // profile: computed(() => AppState.profile),
       activeProfile: computed(() => AppState.activeProfile),
-      posts: computed(() => AppState.posts),
-      myPosts: computed(() => AppState.myPosts),
+      // posts: computed(() => AppState.posts),
+      // myPosts: computed(() => AppState.myPosts),
+      posts: computed(() => AppState.profilePosts),
       account: computed(() => AppState.account),
       user: computed(() => AppState.user)
     })
@@ -85,7 +85,8 @@ export default {
         await accountService.getProfile(route.params.id)
         // await accountService.getProfile(route.params.id)
         await profileService.getActiveProfile(route.params.id)
-        await postsService.getByCreatorId(route.params.id)
+        await profileService.getProfilePosts(route.params.id)
+        // await postsService.getByCreatorId(route.params.id)
       } catch (error) {
         Notification.toast('Error:' + error, 'error')
       }
@@ -109,5 +110,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>
