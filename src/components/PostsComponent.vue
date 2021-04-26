@@ -15,6 +15,9 @@
           <i v-if="post.creator.graduated" class="fas fa-user-graduate"></i>
           <div>
             <p> {{ post.body }}</p>
+            <div>
+              <img :src="post.imgUrl" class="w-100" alt="">
+            </div>
           </div>
         </div>
         <div class="col">

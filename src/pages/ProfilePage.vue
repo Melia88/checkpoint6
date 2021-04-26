@@ -15,7 +15,7 @@
     <PostsComponent v-for="post in state.posts" :key="post.id" :post="post" />
   </div>
 
-  <div class="ProfilePage card shadow col-12 m-2">
+  <div class="ProfilePage card shadow col-12 m-2" v-if="state.Profile == state.account">
     <div class="card-body">
       <form @submit.prevent="create">
         <div class="form-group">
