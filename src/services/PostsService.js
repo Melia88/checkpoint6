@@ -1,3 +1,4 @@
+import { post } from 'jquery'
 import { AppState } from '../AppState'
 import { api } from './AxiosService'
 
@@ -44,16 +45,28 @@ class PostsService {
     // everytime a post is created, we will change pages
     // router.push({ name: 'CarDetails', params: { id: res.data.id } })
   }
+  // async createPost(body) {
+  //   const res = await api.post('api/posts', newPost)
+  //   // AppState.posts.push(res.data)
+  //   AppState.posts = [...AppState.posts, res.data]
+
+  // }
 
   async likePost(id) {
-    await api.post(`api/posts/${id}/like`)
+    const res = await api.post(`api/posts/${id}/like`)
+    AppState.posts.find(p => p.id === id)
+    post.likes = res.data.likes
     this.getAll()
   }
 
   async deletePost(id) {
-    await api.delete('posts/' + id)
+    await api.delete('api/posts/' + id)
     AppState.posts = AppState.posts.filter(post => post.id !== id)
   }
+
+  // getPosts(page = 1){
+  //   const res = await api
+  // }
 }
 
 export const postsService = new PostsService()

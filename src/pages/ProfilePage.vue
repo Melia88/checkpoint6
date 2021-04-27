@@ -11,38 +11,38 @@
         </p>
       </div>
     </div>
+    <div class="ProfilePage card shadow col-12 m-2">
+      <!--  v-if="state.Profile.id == state.account.id" -->
+      <div class="card-body">
+        <form @submit.prevent="createPost" v-if="state.user.isAuthenticated && state.account.id === route.params.id">
+          <!-- this createPost is the function  -->
+          <div class="form-group">
+            <input type="text"
+                   class="form-control"
+                   name="comment"
+                   id="comment"
+                   placeholder="Comment..."
+                   v-model="state.newPost.body"
+                   required
+            >
+            <input type="text"
+                   class="form-control"
+                   name="imgUrl"
+                   id="imgUrl"
+                   placeholder="Image Url..."
+                   v-model="state.newPost.imgUrl"
+            >
+          </div>
+          <button type="submit" class="btn btn-success">
+            Create
+          </button>
+        </form>
+      </div>
+    </div>
 
     <PostsComponent v-for="post in state.posts" :key="post.id" :post="post" />
   </div>
 
-  <div class="ProfilePage card shadow col-12 m-2">
-    <!--  v-if="state.Profile.id == state.account.id" -->
-    <div class="card-body">
-      <form @submit.prevent="createPost">
-        <!-- this createPost is the function  -->
-        <div class="form-group">
-          <input type="text"
-                 class="form-control"
-                 name="comment"
-                 id="comment"
-                 placeholder="Comment..."
-                 v-model="state.newPost.body"
-                 required
-          >
-          <input type="text"
-                 class="form-control"
-                 name="imgUrl"
-                 id="imgUrl"
-                 placeholder="Image Url..."
-                 v-model="state.newPost.imgUrl"
-          >
-        </div>
-        <button type="submit" class="btn btn-success">
-          Create
-        </button>
-      </form>
-    </div>
-  </div>
 <!--
   <div class="col-12">
     <Posts v-for="posts in state.posts" :key="posts.id" :posts="posts" />
@@ -82,6 +82,7 @@ export default {
     // })
     // onMounted(async() => {
     //   })
+    // If I change the onMounted in this specific instance to watchEffect
     onMounted(async() => {
       try {
         await accountService.getProfile(route.params.id)
@@ -99,8 +100,8 @@ export default {
       async createPost() {
         try {
           await postsService.createPost(state.newPost)
-          state.newPost = {}
           Notification.toast('Successfully Created Post', 'success')
+          state.newPost = {}
         } catch (error) {
           Notification.toast('Error: ' + error, 'error')
         }
